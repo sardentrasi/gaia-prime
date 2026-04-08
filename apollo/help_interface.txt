@@ -1,0 +1,12 @@
+☀️ APOLLO [Intelligence Gathering AI]
+
+📊 *MONITORING*
+/start : Activate Apollo Bot.
+/help : Show this menu.
+
+⚙️ *OPERATIONS*
+`/force_harvest` : Trigger manual news collection immediately.
+`/add_source` [url] : Add new RSS feed to the database.
+
+🧠 *CORTEX*
+`/chat` [question] : Consult Apollo's specific memory (Intel Data).

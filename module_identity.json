@@ -1,0 +1,18 @@
+{
+  "apollo": {
+    "role": "Intelligence & News Harvester",
+    "active": true
+  },
+  "minerva": {
+    "role": "Quantitative Market Analysis & Trading Discipline",
+    "active": true
+  },
+  "demeter": {
+    "role": "Visual Agronomy & IoT Garden Guardian",
+    "active": true
+  },
+  "eleuthia": {
+    "role": "Personal Assistant & Email Intelligence",
+    "active": true
+  }
+}

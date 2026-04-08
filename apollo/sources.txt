@@ -1,0 +1,25 @@
+# Apollo News Sources
+# Format: URL (lines starting with # are ignored)
+
+https://www.cnbcindonesia.com/market/rss
+https://www.cnnindonesia.com/ekonomi/rss
+https://www.cnnindonesia.com/teknologi/rss
+https://www.cnnindonesia.com/hiburan/rss
+https://www.cnnindonesia.com/gaya-hidup/rss
+https://www.cnnindonesia.com/edukasi/rss
+https://www.cnnindonesia.com/olahraga/rss
+https://www.cnnindonesia.com/nasional/rss
+https://www.cnnindonesia.com/otomotif/rss
+https://www.cnnindonesia.com/internasional/rss
+https://feed.liputan6.com/rss/health
+https://feed.liputan6.com/rss/bisnis
+https://feed.liputan6.com/rss/global
+https://feed.liputan6.com/rss/saham
+https://feed.liputan6.com/rss/spotlight
+https://feed.liputan6.com/rss/tekno
+https://feed.liputan6.com/rss/cek-fakta
+https://feed.liputan6.com/rss/regional
+https://feed.liputan6.com/rss/lifestyle
+https://feed.liputan6.com/rss/news
+https://www.sindonews.com/feed
+https://mediaindonesia.com/feed

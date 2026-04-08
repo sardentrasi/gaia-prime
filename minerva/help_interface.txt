@@ -1,0 +1,20 @@
+🦉 MINERVA TRADE ANALYST
+
+📊 *STOCK ANALYSIS*
+/analyze [ticker] : Perform manual analysis on a stock ticker.
+/wanalyze [ticker] : Perform weekly timeframe analysis on a stock ticker.
+
+⚙️ *AUTOMATION TRIGGERS*
+/morning : Trigger manual Morning Call (08:30 WIB).
+/night : Trigger manual Night Analysis (19:00 WIB).
+/weekly : Generate Weekly Strategy Report.
+/monthly : Generate Monthly Report.
+
+🧠 *BRAIN MANAGEMENT (Persona)*
+/viewbrain : View current system prompt.
+/brainupdate [instruction] : Tweak the current brain.
+/brainreplace [concept] : Re-write the brain from scratch.
+/ingest : Read & memorize library (PDFs) into RAG.
+
+ℹ️ *INFO*
+/help : Show this menu.

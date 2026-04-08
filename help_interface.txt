@@ -1,0 +1,53 @@
+🌍 G.A.I.A. [General Artificial Intelligence Architecture]
+
+📊 *MONITORING*
+/status : Check System & Module Health.
+/audit [name] : Inspect code quality & security.
+
+⚙️ *CONTROL*
+/start [module] : Start specific module.
+/stop [module] : Stop specific module.
+/rollback [mod] [lvl] [otp] : Manually revert to last backup.
+/add_source [url] : Add new RSS feed to Apollo.
+
+🔨 *FURNACE*
+/forge [name] [lvl] [otp] [desc] : Create new Sub Function AI.
+/initialize [name] [lvl] [otp] : Deploy & Ignite new Sub Function AI.
+/upgrade [mod] [lvl] [otp] [instr] : Evolve module (Secure).
+
+🛡️ *SECURITY*
+/setup_security : Generate Alpha/Omega keys.
+/purge [mod] [lvl] [otp] : Delete module (Soft/Hard Delete).
+
+🚑 *LAZARUS*
+/learn : Force Gaia to learn/index source code manually.
+_System Active:_ 
+• Auto-Healing (RAG-Based Diagnosis).
+• Just-In-Time Learning (Auto-ingests broken code).
+• 3-Strike Rule (Safety Limit).
+
+🧠 *CORTEX (Active Memory & Agents)*
+/chat [question] : Chat with Gaia (Uses RAG & Self-Recording).
+/remind [text] : Add a reminder using natural language (e.g. "remind me in 10 mins").
+_Capabilities:_
+• Auto-Record: Gaia remembers what you say.
+• Smart Retrieval: Fetches relevant news/chats context.
+• Interactive Agent: Gaia detects reminders proactively.
+
+💾 *MEMORY MANAGEMENT*
+/memory_stats : View memory analytics dashboard.
+/cleanup_memory [days] : Remove memories older than N days.
+/cleanup_memory priority [N] : Remove memories with priority < N.
+/session_info : View active memory sessions.
+/new_session [name] : Start new isolated memory session.
+/switch_session [id] : Switch to an existing session.
+/end_session : End current memory session.
+_Features:_
+• Semantic Boosting: Enhanced query relevance.
+• Priority-Based Storage: 1-10 importance scale.
+• Auto-Cleanup: Age & priority-based pruning.
+• LRU Caching: Faster repeated queries.
+• Session Isolation: Separate conversation contexts.
+
+ℹ️ *INFO*
+/help : Show this menu.

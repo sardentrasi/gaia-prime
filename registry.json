@@ -1,0 +1,18 @@
+{
+  "demeter": {
+    "path": "demeter",
+    "active": true
+  },
+  "minerva": {
+    "path": "minerva",
+    "active": true
+  },
+  "apollo": {
+    "path": "apollo",
+    "active": true
+  },
+  "eleuthia": {
+    "path": "eleuthia",
+    "active": true
+  }
+}

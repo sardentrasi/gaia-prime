@@ -1,0 +1,90 @@
+{
+  "technical_keywords": [
+    "code", "kode", "script", "file", "fungsi", "function", "class", "def ", "import ", "main.py", "audit", "debug", "fix"
+  ],
+  "news_keywords": [
+    "berita", "news", "headline", "ihsg", "saham", "market", "cuaca", "laporan"
+  ],
+  "rag_audit_lazarus_keywords": [
+    "source code structure", "main logic", "class definitions", "critical functions"
+  ],
+  "architecture_keywords": [
+    "architecture", "arsitektur", "flow", "alur", "registry", "topology"
+  ],
+  "semantic_boosts": {
+    "apollo": "berita news terbaru market finance ekonomi",
+    "minerva": "saham analisa report analysis stock signal teknikal fundamental",
+    "technical_knowledge": "buku pustaka library teori wyckoff vsa edukasi pdf pemegang saham shareholder emiten data keuangan laporan keuangan",
+    "eleuthia": "tagihan bill payment token listrik email gmail outlook",
+    "demeter": "log status sensor irigasi hama tanaman garden",
+    "system_architecture": "system architecture design flow modules registry integration core logic"
+  },
+  "technical_domain_keywords": "source code python script function class architecture logic main.py",
+  "recency_keywords": [
+    "semalam", "tadi pagi", "tadi malam", "last night", "kemarin", "yesterday", "recent", "latest", "terakhir", "terbaru", "hari ini", "today"
+  ],
+  "cross_ref_keywords": [
+    "news", "berita", "update", "market", "saham", "stock", "price", "ekonomi"
+  ],
+  "memory_retrieval": {
+    "entity_query_limit": 25,
+    "technical_query_limit": 5,
+    "general_query_limit": 10,
+    "book_query_limit": 10,
+    "recency_boost_keywords": "recent latest today yesterday night analysis report"
+  },
+  "entity_filters": {
+    "reminder": [
+      "ingetin", "ingatkan", "ingat", "remind", "reminder", "alarm", "bangunin", "jadwal"
+    ],
+    "demeter": [
+      "demeter", "kebun", "taman", "tanaman", "siram", "irigasi", "hama", "sensor", "iot", "kelembaban", "soil", "moisture", "pompa"
+    ],
+    "system_architecture": [
+      "architecture", "arsitektur", "design", "system", "flow", "diagram", "topology", "structure", "module", "registry", "integration"
+    ],
+    "minerva": [
+      "minerva", "saham", "stock", "equity", "bursa", "idx", "bei", "trading", "investasi", "ihsg", "analisa", "analisis", "teknikal", "fundamental", "chart", "trend", "bullish", "bearish", "rekomendasi", "emiten", "pemegang saham", "shareholder", "portofolio", "dividen"
+    ],
+    "technical_knowledge": [
+      "buku", "pustaka", "library", "theory", "teori", "wyckoff", "vsa", "ingest", "edukasi", "pdf", "manual"
+    ],
+    "apollo": [
+      "apollo", "berita", "news", "kabar", "update", "terkini", "terbaru", "headline", "politik", "ekonomi", "bisnis", "sosial", "kriminal", "hukum", "cuaca", "teknologi"
+    ],
+    "eleuthia": [
+      "eleuthia", "tagihan", "bill", "invoice", "listrik", "pln", "air", "pdam", "pembayaran", "cicilan", "gaji", "rekening", "saldo", "bca", "mandiri", "email", "gmail"
+    ]
+  },
+  "memory_priorities": {
+    "user_interaction": 7,
+    "apollo": 6,
+    "minerva": 8,
+    "demeter": 6,
+    "eleuthia": 7,
+    "technical_knowledge": 9,
+    "source_code": 9,
+    "book": 9,
+    "ai_response": 5,
+    "gaia_noted": 9,
+    "general": 5
+  },
+  "context_windows": {
+    "default_max_tokens": 4000,
+    "default_max_chars": 15000,
+    "technical_max_tokens": 8000,
+    "technical_max_chars": 30000,
+    "conversation_max_tokens": 3000,
+    "conversation_max_chars": 12000
+  },
+  "session_config": {
+    "auto_expire_minutes": 60,
+    "max_sessions": 20
+  },
+  "cleanup_config": {
+    "auto_cleanup_enabled": true,
+    "max_memory_age_days": 90,
+    "min_priority_threshold": 3,
+    "cleanup_interval_hours": 24
+  }
+}

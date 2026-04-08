@@ -1,0 +1,15 @@
+litellm
+telethon
+pillow
+pytz
+python-dotenv
+chromadb==0.4.24
+numpy<2.0.0
+python-telegram-bot[job-queue]
+langchain
+langchain-community
+langchain-chroma
+pypdf
+requests
+flask
+schedule

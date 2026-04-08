@@ -1,0 +1,47 @@
+{
+  "scheduling": {
+    "morning_briefing_time": "07:00",
+    "email_check_interval_minutes": 5,
+    "calendar_sync_interval_minutes": 60,
+    "timezone": "Asia/Jakarta"
+  },
+  "__meta__": "System settings for scheduling and notifications. For email rules, use filtermail.json",
+  "briefing": {
+    "vip_emails": [
+      "boss@company.com",
+      "bank@bca.co.id",
+      "important@client.com"
+    ],
+    "location_city": "Bekasi",
+    "include_weather": true,
+    "include_calendar": true,
+    "include_vip_inbox": true
+  },
+  "notification_settings": {
+    "send_morning_briefing": true,
+    "send_urgent_alerts": true,
+    "send_calendar_reminders": true,
+    "quiet_hours_start": "22:00",
+    "quiet_hours_end": "06:00"
+  },
+  "categories": {
+    "work": {
+      "priority": 1,
+      "quiet_hours": {
+        "start": "18:00",
+        "end": "08:00"
+      },
+      "notify_urgent": true,
+      "notify_info": false
+    },
+    "personal": {
+      "priority": 2,
+      "quiet_hours": {
+        "start": "22:00",
+        "end": "06:00"
+      },
+      "notify_urgent": true,
+      "notify_info": false
+    }
+  }
+}

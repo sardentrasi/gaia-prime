@@ -1,0 +1,121 @@
+{
+  "technical_keywords": [
+    "code",
+    "kode",
+    "script",
+    "file",
+    "fungsi",
+    "function",
+    "class",
+    "def ",
+    "import ",
+    "main.py",
+    "audit",
+    "debug",
+    "fix"
+  ],
+  "news_keywords": [
+    "berita",
+    "news",
+    "headline",
+    "ihsg",
+    "saham",
+    "market",
+    "cuaca",
+    "laporan"
+  ],
+  "semantic_boosts": {
+    "apollo": "berita news hari ini terbaru politik kriminal cuaca sosial hukum budaya olahraga nasional internasional market finance economy",
+    "minerva": " saham analisa laporan report analysis weekly daily recommendation stock signal buy sell hold teknikal fundamental teori wyckoff vsa",
+    "technical_knowledge": "buku pustaka library ingest teori theory wyckoff vsa konsep studi literatur edukasi pdf",
+    "eleuthia": "tagihan bill invoice payment log history transaction token listrik air email gmail outlook draft reply mailing response",
+    "demeter": "log status sensor irrigation pest hama update report garden plants tanaman"
+  },
+  "recency_keywords": [
+    "semalam",
+    "tadi pagi",
+    "tadi malam",
+    "last night",
+    "kemarin",
+    "yesterday",
+    "recent",
+    "latest",
+    "terakhir",
+    "terbaru",
+    "hari ini",
+    "today",
+    "bulan lalu",
+    "tahun lalu",
+    "dulu",
+    "minggu lalu",
+    "history",
+    "pagi ini"
+  ],
+  "news_subcategories": [
+    "politik",
+    "ekonomi",
+    "market",
+    "bisnis",
+    "sosial",
+    "kriminal",
+    "olahraga",
+    "teknologi",
+    "cuaca"
+  ],
+  "entity_filters": {
+    "demeter": [
+      "demeter",
+      "kebun",
+      "taman",
+      "tanaman",
+      "siram",
+      "irigasi",
+      "air"
+    ],
+    "minerva": [
+      "minerva",
+      "saham",
+      "pasar modal",
+      "ihsg",
+      "trading",
+      "investasi",
+      "analisa",
+      "rekomendasi"
+    ],
+    "apollo": [
+      "apollo",
+      "berita",
+      "news",
+      "kabar",
+      "update",
+      "headline",
+      "nasional",
+      "internasional",
+      "politik",
+      "ekonomi",
+      "kriminal",
+      "hukum",
+      "cuaca",
+      "olahraga",
+      "teknologi"
+    ]
+  },
+  "memory_priorities": {
+    "user_interaction": 7,
+    "apollo": 6,
+    "minerva": 7,
+    "demeter": 6,
+    "eleuthia": 7,
+    "technical_knowledge": 9,
+    "source_code": 9,
+    "book": 9,
+    "ai_response": 5,
+    "general": 5
+  },
+  "context_windows": {
+    "default_max_tokens": 4000,
+    "default_max_chars": 15000,
+    "conversation_max_tokens": 3000,
+    "conversation_max_chars": 12000
+  }
+}

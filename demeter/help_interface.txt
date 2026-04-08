@@ -1,0 +1,11 @@
+🌱 DEMETER [Telemetry & IoT Control]
+
+📡 *MONITORING DASHBOARD*
+/status : Minta laporan visual (CCTV) & data tanah terkini.
+• _Mengambil capture real-time dan cache sensor terakhir._
+/ping   : Cek latensi server Demeter.
+
+🤖 *SYSTEM CONTROLS*
+/start  : Registrasi user ke notifikasi sistem.
+/help   : Menampilkan pusat komando ini.
+/chat [question] : Chat with Demeter

@@ -1,0 +1,54 @@
+# Secrets
+.env
+.env.local
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Logs
+*.log
+logs/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Sub-module data
+eleuthia/eleuthia_memory_core/
+eleuthia/credentials/
+minerva/harvested_data/
+demeter/data_logs/
+demeter/vision_capture/
+apollo/data/
+**/credentials/*.json
+**/settings.json
+**/config.json
+!eleuthia_config.json
+!minerva_config.json
+!mother_gaia_config.json

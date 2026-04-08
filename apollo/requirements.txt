@@ -1,0 +1,14 @@
+python-telegram-bot==20.0
+python-dotenv
+litellm
+chromadb==0.4.24
+feedparser
+python-dateutil
+httpx
+numpy<2.0.0
+langchain-community
+langchain-core
+langchain-chroma
+python-telegram-bot[job-queue]
+pytz
+schedule

@@ -1,0 +1,23 @@
+python-telegram-bot[job-queue]
+libtmux
+python-dotenv
+pytz
+litellm>=1.0.0
+pyotp
+feedparser
+python-dateutil
+schedule
+requests
+numpy<2.0.0
+chromadb==0.4.24
+streamlit
+langchain
+langchain-community
+langchain-chroma
+langchain-litellm
+pypdf
+flask
+qrcode
+pillow
+# Standard Libraries (No install needed):
+# os, sys, subprocess, shutil, json, re, datetime, time, logging, asyncio
