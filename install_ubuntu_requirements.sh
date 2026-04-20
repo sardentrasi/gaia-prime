@@ -10,7 +10,7 @@ if [[ ! -f "/etc/os-release" ]]; then
 fi
 
 if ! grep -qi "ubuntu" /etc/os-release; then
-  echo "This installer is intended for Ubuntu servers."
+  echo "This installer is intended for Ubuntu systems."
   exit 1
 fi
 
@@ -63,7 +63,7 @@ for req in "${REQUIREMENT_FILES[@]}"; do
 done
 
 if [[ -f "${REPO_ROOT}/eleuthia/package.json" ]]; then
-  echo "Installing Node.js dependency for Eleuthia..."
+  echo "Installing Node.js dependencies for Eleuthia..."
   (cd "${REPO_ROOT}/eleuthia" && npm install)
 fi
 
