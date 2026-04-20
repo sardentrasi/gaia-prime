@@ -15,6 +15,19 @@ Before starting, ensure you have the following installed on your system:
 
 ---
 
+## ⚡ Quick Ubuntu Installer
+
+If Gaia Prime will run on an Ubuntu server, use the installer script from the repository root:
+
+```bash
+chmod +x install_ubuntu_requirements.sh
+./install_ubuntu_requirements.sh
+```
+
+The script installs required Ubuntu packages (Python, FFmpeg, tmux, Node.js/npm), then installs all Python requirements from root and module folders, plus `eleuthia/package.json`.
+
+---
+
 ## 🛠️ Step 1: Global Foundations
 
 1. **Clone the Repository:**
