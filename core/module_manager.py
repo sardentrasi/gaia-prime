@@ -86,7 +86,11 @@ class ModuleManager:
         
         # Multi-user access
         users_str = os.getenv("USERS_ALLOWED", "")
-        telegram_chat_id = int(os.getenv("TELEGRAM_CHAT_ID", os.getenv("MY_USER_ID", 0)))
+        _raw_chat_id = os.getenv("TELEGRAM_CHAT_ID") or os.getenv("MY_USER_ID", "0")
+        try:
+            telegram_chat_id = int(_raw_chat_id)
+        except (ValueError, TypeError):
+            telegram_chat_id = 0
         self.allowed_users = [int(x) for x in users_str.split(',') if x.strip().isdigit()]
         if telegram_chat_id != 0 and telegram_chat_id not in self.allowed_users:
             self.allowed_users.append(telegram_chat_id)
@@ -434,7 +438,9 @@ class ModuleManager:
         os.makedirs(backup_dir, exist_ok=True)
         
         module_path = os.path.abspath(self.modules[name]["path"])
-        source_file = os.path.join(module_path, "main.py")
+        source_file = os.path.join(module_path, f"{name}_main.py")
+        if not os.path.exists(source_file):
+            source_file = os.path.join(module_path, "main.py")
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         shutil.copy2(source_file, os.path.join(backup_dir, f"main_PRE_UPGRADE_{ts}.py"))
         
@@ -484,7 +490,10 @@ class ModuleManager:
             return False, "Backup folder empty."
         target_backup = backups[-1]
         module_path = os.path.abspath(self.modules[name]["path"])
-        shutil.copy2(target_backup, os.path.join(module_path, "main.py"))
+        dest_file = os.path.join(module_path, f"{name}_main.py")
+        if not os.path.exists(dest_file):
+            dest_file = os.path.join(module_path, "main.py")
+        shutil.copy2(target_backup, dest_file)
         self.stop_module(name)
         time.sleep(1)
         self.start_module(name)
