@@ -25,7 +25,8 @@ try:
 except pytz.UnknownTimeZoneError:
     MY_TZ = pytz.timezone("Asia/Jakarta")
 
-_raw_chat_id = os.getenv("TELEGRAM_CHAT_ID") or os.getenv("MY_USER_ID", "0")
+_telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
+_raw_chat_id = _telegram_chat_id if _telegram_chat_id is not None else os.getenv("MY_USER_ID", "0")
 try:
     TELEGRAM_CHAT_ID = int(_raw_chat_id)
 except (ValueError, TypeError):

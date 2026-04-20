@@ -86,7 +86,8 @@ class ModuleManager:
         
         # Multi-user access
         users_str = os.getenv("USERS_ALLOWED", "")
-        _raw_chat_id = os.getenv("TELEGRAM_CHAT_ID") or os.getenv("MY_USER_ID", "0")
+        _telegram_chat_id = os.getenv("TELEGRAM_CHAT_ID")
+        _raw_chat_id = _telegram_chat_id if _telegram_chat_id is not None else os.getenv("MY_USER_ID", "0")
         try:
             telegram_chat_id = int(_raw_chat_id)
         except (ValueError, TypeError):
@@ -304,6 +305,13 @@ class ModuleManager:
                 clean = clean.replace("```json", "").replace("```python", "").replace("```", "")
         return clean.strip()
 
+    def _get_main_script_path(self, name, module_path):
+        """Return the primary main script path for a module ({name}_main.py with fallback to main.py)."""
+        path = os.path.join(module_path, f"{name}_main.py")
+        if not os.path.exists(path):
+            path = os.path.join(module_path, "main.py")
+        return path
+
     def _get_rag_context(self, name, module_path):
         """Read requirements.txt and source code for AI operations."""
         reqs = ""
@@ -313,10 +321,7 @@ class ModuleManager:
             if os.path.exists(req_path):
                 with open(req_path, "r") as f:
                     reqs = f.read()
-            # Try module-specific main file first
-            source_file = os.path.join(module_path, f"{name}_main.py")
-            if not os.path.exists(source_file):
-                source_file = os.path.join(module_path, "main.py")
+            source_file = self._get_main_script_path(name, module_path)
             if os.path.exists(source_file):
                 with open(source_file, "r", encoding="utf-8") as f:
                     code = f.read()
@@ -438,9 +443,7 @@ class ModuleManager:
         os.makedirs(backup_dir, exist_ok=True)
         
         module_path = os.path.abspath(self.modules[name]["path"])
-        source_file = os.path.join(module_path, f"{name}_main.py")
-        if not os.path.exists(source_file):
-            source_file = os.path.join(module_path, "main.py")
+        source_file = self._get_main_script_path(name, module_path)
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
         shutil.copy2(source_file, os.path.join(backup_dir, f"main_PRE_UPGRADE_{ts}.py"))
         
@@ -490,9 +493,7 @@ class ModuleManager:
             return False, "Backup folder empty."
         target_backup = backups[-1]
         module_path = os.path.abspath(self.modules[name]["path"])
-        dest_file = os.path.join(module_path, f"{name}_main.py")
-        if not os.path.exists(dest_file):
-            dest_file = os.path.join(module_path, "main.py")
+        dest_file = self._get_main_script_path(name, module_path)
         shutil.copy2(target_backup, dest_file)
         self.stop_module(name)
         time.sleep(1)
