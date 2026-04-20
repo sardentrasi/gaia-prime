@@ -67,5 +67,5 @@ if [[ -f "${REPO_ROOT}/eleuthia/package.json" ]]; then
   (cd "${REPO_ROOT}/eleuthia" && npm install)
 fi
 
-echo "Done. Activate environment with:"
+echo "Done. Activate environment in every new shell session with:"
 echo "source ${VENV_DIR}/bin/activate"
