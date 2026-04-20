@@ -59,6 +59,8 @@ for req in "${REQUIREMENT_FILES[@]}"; do
   if [[ -f "${req}" ]]; then
     echo "Installing Python dependencies from ${req}..."
     "${PIP_BIN}" install -r "${req}"
+  else
+    echo "Skipping missing requirements file: ${req}"
   fi
 done
 
@@ -67,5 +69,6 @@ if [[ -f "${REPO_ROOT}/eleuthia/package.json" ]]; then
   (cd "${REPO_ROOT}/eleuthia" && npm install)
 fi
 
-echo "Done. Activate environment in every new shell session with:"
+echo "Done. Some optional components may have been skipped if files were missing."
+echo "Activate environment in every new shell session with:"
 echo "source ${VENV_DIR}/bin/activate"
