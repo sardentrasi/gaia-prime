@@ -147,7 +147,7 @@ class CalendarConfig:
 
 # Telegram Configuration
 class TelegramConfig:
-    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+    BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN') or os.getenv('BOT_TOKEN')
     CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 # LLM Configuration
