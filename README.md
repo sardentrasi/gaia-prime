@@ -104,7 +104,7 @@ python mother_gaia.py
 
 ## 💾 Survival Protocol
 
-Gaia Prime is designed for high availability. In the event of a central core failure, all sub-pillars can transition into **Survival Mode** independently. See [README_STANDALONE.md](README_STANDALONE.md) for global survival instructions.
+Gaia Prime is designed for high availability. In the event of a central core failure, all sub-pillars can transition into **Survival Mode** independently. See [README_STANDALONE.md](docs/survival/README_STANDALONE.md) for global survival instructions.
 
 ---
 
