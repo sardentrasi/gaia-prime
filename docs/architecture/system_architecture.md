@@ -74,7 +74,7 @@ Ensures strict context boundaries while allowing intelligent cross-referencing:
 ## 4. Operational Hierarchy
 
 1.  **User Input** -> **Local Brain** (`apollo_main.py` / `mother_gaia.py`)
-2.  **Intent Detection** -> `intent_config.json` (Local prioritied over Root)
+2.  **Intent Detection** -> `intent_config.json` (Local prioritized over Root)
 3.  **Memory Retrieval (Ranking 2.0)** -> **Local Memory Core**
     - Search: `Query` + `Semantic Boost`
     - Rank: `Similarity` + `Category Match` + `Recency`
