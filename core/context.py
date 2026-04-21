@@ -354,9 +354,13 @@ class ContextManager:
             # Architecture awareness
             if intent.is_architecture:
                 try:
-                    arch_path = os.path.join(self.root_dir, "system_architecture.md")
+                    arch_candidates = [
+                        os.path.join(self.root_dir, "docs", "architecture", "system_architecture.md"),
+                        os.path.join(self.root_dir, "system_architecture.md"),
+                    ]
                     registry_path = os.path.join(self.root_dir, "registry.json")
-                    
+                    arch_path = next((p for p in arch_candidates if os.path.exists(p)), arch_candidates[0])
+
                     with open(arch_path, "r", encoding="utf-8") as f:
                         arch_doc = f.read()
                     with open(registry_path, "r", encoding="utf-8") as f:

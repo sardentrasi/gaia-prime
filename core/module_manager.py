@@ -272,25 +272,23 @@ class ModuleManager:
 
     def _load_brain_file(self, filename):
         root = os.path.dirname(self.registry_file)
-        path = os.path.join(root, filename)
-        if os.path.exists(path):
-            with open(path, "r") as f:
-                return f.read()
+        candidate_paths = [
+            os.path.join(root, "prompts", "brains", filename),
+            os.path.join(root, filename),
+        ]
+        for path in candidate_paths:
+            if os.path.exists(path):
+                with open(path, "r") as f:
+                    return f.read()
         return ""
 
     def _load_furnace_brain(self, name, desc):
-        root = os.path.dirname(self.registry_file)
-        brain_path = os.path.join(root, "brain_furnace.md")
         default_template = (
             "Create a python telegram bot named {name}. "
             "Description: {desc}. "
             "Use python-telegram-bot v20+. Return ONLY code."
         )
-        if os.path.exists(brain_path):
-            with open(brain_path, "r") as f:
-                template = f.read()
-        else:
-            template = default_template
+        template = self._load_brain_file("brain_furnace.md") or default_template
         return template.format(name=name, desc=desc)
 
     def _clean_json_text(self, text):

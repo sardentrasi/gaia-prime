@@ -36,7 +36,7 @@ If a module detects that the central Gaia sync is failing (`ConnectionError`), i
 
 If the Root core is reachable but modules are crashing, invoke the Lazarus Protocol:
 
-1. Ensure `brain_lazarus.txt` is updated.
+1. Ensure `brain_lazarus.md` is updated.
 2. The sentinel in `mother_gaia.py` will monitor and auto-heal.
 
 ---

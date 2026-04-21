@@ -88,14 +88,19 @@ class LazarusGuardian:
         code_context = self._get_surgical_context(source_file, error_snippet)
         
         # E. AI Consult (Load from MD Brain)
-        brain_path = os.path.join(os.getcwd(), "brain_lazarus.md")
+        root_dir = os.getcwd()
+        brain_paths = [
+            os.path.join(root_dir, "prompts", "brains", "brain_lazarus.md"),
+            os.path.join(root_dir, "brain_lazarus.md"),
+        ]
         default_prompt = "You are Lazarus. Fix this error: {error_snippet}\nCode: {code_context}\nReturn ONLY JSON."
-        
-        if os.path.exists(brain_path):
-            with open(brain_path, "r", encoding="utf-8") as f:
-                prompt_template = f.read()
-        else:
-            prompt_template = default_prompt
+
+        prompt_template = default_prompt
+        for brain_path in brain_paths:
+            if os.path.exists(brain_path):
+                with open(brain_path, "r", encoding="utf-8") as f:
+                    prompt_template = f.read()
+                break
 
         prompt = prompt_template.format(
             module_name=module_name,
