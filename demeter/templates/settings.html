@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Demeter — Settings{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+    <h1 class="text-[40px] md:text-[56px] font-display uppercase">Settings</h1>
+    <p class="text-[14px] font-bold text-[#868685] uppercase tracking-wider mt-3">Runtime configuration (resets on reboot)</p>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <!-- Sensor Thresholds -->
+    <div class="bg-white rounded-[30px] p-6 md:p-8 shadow-[0_0_0_1px_rgba(14,15,12,0.12)]">
+        <div class="flex items-center gap-3 mb-6 border-b border-[#e8ebe6] pb-4">
+            <div class="w-10 h-10 rounded-full bg-[#9fe870] flex items-center justify-center text-[#163300]">
+                <i data-lucide="gauge" class="w-5 h-5" stroke-width="2.5"></i>
+            </div>
+            <h2 class="text-[20px] font-display uppercase">Sensor Thresholds</h2>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-[11px] font-bold uppercase tracking-widest text-[#454745] mb-2">Plant Name / Specimen</label>
+                <input type="text" id="set-plant-name" class="form-control" placeholder="Monstera Deliciosa Variegata">
+                <p class="text-[11px] font-semibold text-[#868685] mt-1">Displayed on Dashboard and Logs</p>
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold uppercase tracking-widest text-[#454745] mb-2">Moisture Safety Limit (%)</label>
+                <input type="number" id="set-moisture-limit" class="form-control" placeholder="40" min="0" max="100">
+                <p class="text-[11px] font-semibold text-[#868685] mt-1">Below this → triggers AI analysis</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cooldown Settings -->
+    <div class="bg-white rounded-[30px] p-6 md:p-8 shadow-[0_0_0_1px_rgba(14,15,12,0.12)]">
+        <div class="flex items-center gap-3 mb-6 border-b border-[#e8ebe6] pb-4">
+            <div class="w-10 h-10 rounded-full bg-[#163300] flex items-center justify-center text-[#9fe870]">
+                <i data-lucide="clock" class="w-5 h-5" stroke-width="2.5"></i>
+            </div>
+            <h2 class="text-[20px] font-display uppercase">Cooldown Timers</h2>
+        </div>
+
+        <div class="space-y-5">
+            <div>
+                <label class="block text-[11px] font-bold uppercase tracking-widest text-[#454745] mb-2">Hard Cooldown (hours)</label>
+                <input type="number" id="set-hard-cooldown" class="form-control" placeholder="6" min="1" max="48" step="0.5">
+                <p class="text-[11px] font-semibold text-[#868685] mt-1">After irrigation action</p>
+            </div>
+            <div>
+                <label class="block text-[11px] font-bold uppercase tracking-widest text-[#454745] mb-2">Soft Cooldown (hours)</label>
+                <input type="number" id="set-soft-cooldown" class="form-control" placeholder="2" min="0.5" max="24" step="0.5">
+                <p class="text-[11px] font-semibold text-[#868685] mt-1">After skip / analysis action</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Save Button -->
+<div class="mt-6 flex justify-end gap-3">
+    <span id="save-result" class="hidden text-[12px] font-bold uppercase tracking-wider self-center"></span>
+    <button id="btn-save-settings" class="px-8 py-3 rounded-full bg-[#9fe870] text-[#163300] font-bold text-[14px] uppercase tracking-wider hover:scale-105 active:scale-95 transition-transform cursor-pointer border-none">
+        <span class="flex items-center gap-2"><i data-lucide="save" class="w-4 h-4"></i> Save Settings</span>
+    </button>
+</div>
+
+<!-- Environment Info -->
+<div class="bg-[#0e0f0c] rounded-[30px] p-6 md:p-8 shadow-[0_0_0_1px_rgba(14,15,12,0.12)] mt-6 text-white">
+    <h2 class="text-[20px] font-display uppercase mb-4">Environment</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-[#868685] mb-1">LLM Model</p>
+            <p id="env-model" class="text-[13px] font-bold text-[#9fe870]">--</p>
+        </div>
+        <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-[#868685] mb-1">Database</p>
+            <p id="env-db" class="text-[13px] font-bold text-[#9fe870]">--</p>
+        </div>
+        <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-[#868685] mb-1">Capture Dir</p>
+            <p id="env-capture" class="text-[13px] font-bold text-[#9fe870]">--</p>
+        </div>
+        <div>
+            <p class="text-[10px] font-bold uppercase tracking-widest text-[#868685] mb-1">Version</p>
+            <p class="text-[13px] font-bold text-[#9fe870]">v6.2</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    // Load current settings
+    try {
+        const res = await fetch('/api/settings');
+        const data = await res.json();
+        document.getElementById('set-plant-name').value = data.plant_name || '';
+        document.getElementById('set-moisture-limit').value = data.moisture_safety_limit;
+        document.getElementById('set-hard-cooldown').value = data.hard_cooldown_hours;
+        document.getElementById('set-soft-cooldown').value = data.soft_cooldown_hours;
+        document.getElementById('env-model').textContent = data.llm_model || '--';
+        document.getElementById('env-db').textContent = data.db_path || '--';
+        document.getElementById('env-capture').textContent = data.capture_dir || '--';
+    } catch(e) { console.error('Settings load error:', e); }
+
+    // Save settings
+    document.getElementById('btn-save-settings').addEventListener('click', async () => {
+        const result = document.getElementById('save-result');
+        try {
+            const res = await fetch('/api/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    plant_name: document.getElementById('set-plant-name').value,
+                    moisture_safety_limit: parseFloat(document.getElementById('set-moisture-limit').value),
+                    hard_cooldown_hours: parseFloat(document.getElementById('set-hard-cooldown').value),
+                    soft_cooldown_hours: parseFloat(document.getElementById('set-soft-cooldown').value)
+                })
+            });
+            const data = await res.json();
+            result.textContent = data.success ? '✓ Settings saved' : '✗ Save failed';
+            result.className = `text-[12px] font-bold uppercase tracking-wider self-center ${data.success ? 'text-[#054d28]' : 'text-[#d03238]'}`;
+            result.classList.remove('hidden');
+            setTimeout(() => result.classList.add('hidden'), 3000);
+        } catch(e) {
+            result.textContent = '✗ Network error';
+            result.className = 'text-[12px] font-bold uppercase tracking-wider self-center text-[#d03238]';
+            result.classList.remove('hidden');
+        }
+    });
+});
+</script>
+{% endblock %}

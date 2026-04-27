@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demeter — Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="bg-white text-[#333333] flex items-center justify-center min-h-screen p-6">
+
+    <!-- Atmospheric gradient wash (§4 Atmospheric Hero) -->
+    <div class="fixed inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 0%, rgba(24,226,153,0.08) 0%, transparent 60%);"></div>
+
+    <div class="mint-card-featured w-full max-w-[420px] !p-10 text-center relative z-10">
+
+        <!-- Brand -->
+        <div class="flex items-center justify-center gap-3 mb-8">
+            <div class="w-10 h-10 rounded-full bg-[#18E299] text-[#0d0d0d] flex items-center justify-center">
+                <i data-lucide="droplets" class="w-5 h-5" stroke-width="2.5"></i>
+            </div>
+            <span class="text-[24px] font-semibold tracking-[-0.24px] text-[#0d0d0d]">Demeter</span>
+        </div>
+
+        <h1 class="text-[40px] font-semibold tracking-[-0.8px] text-[#0d0d0d] leading-[1.1] mb-2">Welcome back</h1>
+        <p class="text-[16px] text-[#666666] mb-8">Sign in to your greenhouse</p>
+
+        <form action="/login" method="POST" class="text-left space-y-4">
+            <div>
+                <label for="username" class="block text-[13px] font-medium text-[#666666] mb-2 tracking-[0.65px] uppercase">Operator ID</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="admin" required autofocus>
+            </div>
+            <div>
+                <label for="password" class="block text-[13px] font-medium text-[#666666] mb-2 tracking-[0.65px] uppercase">Password</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+
+            {% if error %}
+            <div class="bg-[#fde8e8] text-[#d45656] p-3 rounded-[16px] text-[14px] font-medium flex items-center gap-2">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i> {{ error }}
+            </div>
+            {% endif %}
+
+            <button type="submit" id="btn-login" class="btn-primary w-full !py-3 !text-[15px] mt-2">
+                Sign in
+            </button>
+        </form>
+
+        <p class="font-mono text-[10px] text-[#888888] mt-8">DEMETER v6.2 — GREENHOUSE MONITOR</p>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

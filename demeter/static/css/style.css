@@ -1,0 +1,336 @@
+/* ============================================
+   DEMETER — Mintlify Design System Implementation
+   Color, Typography & Components per MINTFLY_DESIGN.md
+   ============================================ */
+
+/* Fonts: Inter (400/500/600) + Geist Mono (500/600) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@500;600&display=swap');
+
+/* --- Custom Properties (§2 Color Palette) --- */
+:root {
+    /* Primary */
+    --near-black: #0d0d0d;
+    --white: #ffffff;
+    --brand-green: #18E299;
+
+    /* Secondary Accents */
+    --brand-green-light: #d4fae8;
+    --brand-green-deep: #0fa76e;
+    --warm-amber: #c37d0d;
+    --soft-blue: #3772cf;
+    --error-red: #d45656;
+
+    /* Neutral Scale */
+    --gray-900: #0d0d0d;
+    --gray-700: #333333;
+    --gray-500: #666666;
+    --gray-400: #888888;
+    --gray-200: #e5e5e5;
+    --gray-100: #f5f5f5;
+    --gray-50: #fafafa;
+
+    /* Surfaces & Borders */
+    --border-subtle: rgba(0,0,0,0.05);
+    --border-medium: rgba(0,0,0,0.08);
+    --card-shadow: rgba(0,0,0,0.03) 0px 2px 4px;
+    --btn-shadow: rgba(0,0,0,0.06) 0px 1px 2px;
+}
+
+/* --- Selection --- */
+::selection {
+    background: var(--brand-green-light);
+    color: var(--near-black);
+}
+
+/* --- Body: Inter weight 400, 16px, 150% line-height (§3) --- */
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.50;
+    color: var(--gray-700);
+    background-color: var(--white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Display Typography (§3 Hierarchy) --- */
+/* Section Heading: 40px, weight 600, -0.8px tracking */
+.font-display {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    line-height: 1.10;
+    letter-spacing: -0.8px;
+}
+
+/* Monospace: Geist Mono for technical labels */
+.font-mono {
+    font-family: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    line-height: 1.50;
+}
+
+/* ============================================
+   COMPONENTS: Buttons (§4)
+   ============================================ */
+
+/* Primary: near-black bg, white text, pill, micro-shadow */
+.btn-primary {
+    background-color: var(--near-black);
+    color: var(--white);
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.50;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: var(--btn-shadow);
+    transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.9; }
+
+/* Secondary / Ghost: white bg, border, pill */
+.btn-secondary {
+    background-color: var(--white);
+    color: var(--near-black);
+    border: 1px solid var(--border-medium);
+    border-radius: 9999px;
+    padding: 4.5px 12px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.50;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+}
+.btn-secondary:hover { opacity: 0.9; }
+
+/* Brand Accent: green bg, near-black text */
+.btn-brand {
+    background-color: var(--brand-green);
+    color: var(--near-black);
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 24px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.50;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s;
+}
+.btn-brand:hover { opacity: 0.9; }
+
+/* ============================================
+   COMPONENTS: Cards (§4)
+   ============================================ */
+
+/* Standard Card: 16px radius, 5% border, ambient shadow */
+.mint-card {
+    background: var(--white);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.2s;
+}
+.mint-card:hover {
+    border-color: var(--border-medium);
+}
+
+/* Featured Card: 24px radius, 32px padding */
+.mint-card-featured {
+    background: var(--white);
+    border: 1px solid var(--border-subtle);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: var(--card-shadow);
+}
+
+/* ============================================
+   COMPONENTS: Form Controls (§4 Inputs)
+   ============================================ */
+.form-control {
+    width: 100%;
+    padding: 10px 16px;
+    background: var(--white);
+    border: 1px solid var(--border-medium);
+    border-radius: 9999px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.50;
+    color: var(--near-black);
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    outline: none;
+}
+.form-control:focus {
+    border-color: var(--brand-green);
+    outline: 1px solid var(--brand-green);
+}
+.form-control::placeholder {
+    color: var(--gray-400);
+    font-weight: 400;
+}
+
+/* Textarea override — not pill */
+textarea.form-control {
+    border-radius: 16px;
+}
+
+/* Select override — not pill */
+select.form-control {
+    border-radius: 16px;
+}
+
+/* ============================================
+   LAYOUT: Sidebar (dark mode per §7)
+   ============================================ */
+#sidebar {
+    background-color: var(--near-black);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease-in-out;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar { position: relative; }
+    #sidebar.minimized { width: 84px; }
+    #sidebar.minimized .sidebar-text,
+    #sidebar.minimized .sidebar-tag,
+    #sidebar.minimized .user-info { display: none; }
+    #sidebar.minimized nav { padding-left: 12px; padding-right: 12px; }
+    #sidebar.minimized a, #sidebar.minimized button { justify-content: center; padding-left: 0; padding-right: 0; }
+}
+
+@media (max-width: 767px) {
+    #sidebar { transform: translateX(-100%); width: 280px; }
+    #sidebar.mobile-open { transform: translateX(0); box-shadow: 20px 0 50px rgba(0,0,0,0.3); }
+}
+
+#sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 15;
+}
+#sidebar-backdrop.show { display: block; }
+
+#sidebar.minimized .sidebar-brand-text { display: none; }
+#sidebar.minimized .sidebar-brand-container { justify-content: center; }
+#sidebar.minimized #btn-sidebar-toggle {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.05);
+}
+
+/* ============================================
+   LAYOUT: Submenu Accordion
+   ============================================ */
+#climatic-submenu, #controls-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s;
+    opacity: 0;
+}
+#climatic-submenu.show, #controls-submenu.show {
+    max-height: 200px;
+    opacity: 1;
+}
+
+/* ============================================
+   COMPONENTS: Notifications
+   ============================================ */
+#notif-dropdown.show { display: block; }
+.notif-item { transition: background-color 0.2s; }
+.notif-item:hover { background-color: var(--gray-50); }
+
+/* ============================================
+   ANIMATION: Pulse dot
+   ============================================ */
+@keyframes pulse-dot {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+.animate-pulse-dot { animation: pulse-dot 2s infinite; }
+
+/* ============================================
+   LAYOUT: Timeline connector
+   ============================================ */
+.log-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 48px;
+    bottom: 0;
+    width: 1px;
+    background: var(--gray-200);
+}
+
+/* ============================================
+   UTILITY: Scrollbar
+   ============================================ */
+.custom-scroll::-webkit-scrollbar { width: 6px; }
+.custom-scroll::-webkit-scrollbar-track { background: transparent; }
+.custom-scroll::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 9999px; }
+.custom-scroll::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 10px; }
+
+/* ============================================
+   UTILITY: Pill Badge (§9 Example)
+   ============================================ */
+.badge-green {
+    background: var(--brand-green-light);
+    color: var(--brand-green-deep);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.badge-amber {
+    background: #fef3cd;
+    color: var(--warm-amber);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.badge-red {
+    background: #fde8e8;
+    color: var(--error-red);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+}

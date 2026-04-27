@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% block title %}Demeter — {{ sensor_config.title }} Analysis{% endblock %}
+
+{% block head_extra %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class='max-w-container-max mx-auto space-y-xl'>
+    <!-- Header Section -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-lg">
+        <div>
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-3 py-1 bg-brand-green-light rounded-full font-mono-code text-mono-code text-brand-green-deep uppercase tracking-wider">Environmental Telemetry</span>
+            </div>
+            <h2 class="font-section-heading text-section-heading text-near-black mb-2">{{ sensor_config.title }} Analysis</h2>
+            <p class="font-body-large text-body-large text-gray-500">{{ sensor_config.subtitle }}</p>
+        </div>
+        
+        <div class="flex gap-2 bg-pure-white p-1 rounded-full border border-border-subtle shadow-sm">
+            <a href="/climatic/temperature" class="px-4 py-2 rounded-full font-label-uppercase text-label-uppercase {% if sensor_type == 'temperature' %}bg-near-black text-pure-white shadow-md{% else %}text-gray-500 hover:text-near-black transition-colors{% endif %}">Temp</a>
+            <a href="/climatic/humidity" class="px-4 py-2 rounded-full font-label-uppercase text-label-uppercase {% if sensor_type == 'humidity' %}bg-near-black text-pure-white shadow-md{% else %}text-gray-500 hover:text-near-black transition-colors{% endif %}">Humidity</a>
+            <a href="/climatic/moisture" class="px-4 py-2 rounded-full font-label-uppercase text-label-uppercase {% if sensor_type == 'moisture' %}bg-near-black text-pure-white shadow-md{% else %}text-gray-500 hover:text-near-black transition-colors{% endif %}">Moisture</a>
+            <a href="/climatic/co2" class="px-4 py-2 rounded-full font-label-uppercase text-label-uppercase {% if sensor_type == 'co2' %}bg-near-black text-pure-white shadow-md{% else %}text-gray-500 hover:text-near-black transition-colors{% endif %}">CO2</a>
+        </div>
+    </div>
+
+    <!-- Main Data Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Stats Sidebar -->
+        <div class="lg:col-span-1 space-y-6">
+            <!-- Current Status Card -->
+            <div class="bg-pure-white rounded-xl border border-border-subtle p-6 shadow-sm">
+                <span class="font-mono-code text-mono-code text-gray-400 block mb-4">CURRENT READING</span>
+                <div class="flex items-baseline gap-2">
+                    <span id="stat-current" class="font-display-hero text-section-heading text-near-black">--</span>
+                    <span class="text-sub-heading text-gray-400">{{ sensor_config.unit }}</span>
+                </div>
+                <div id="status-badge" class="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-50 border border-border-subtle">
+                    <span class="w-2 h-2 rounded-full bg-gray-400"></span>
+                    <span class="font-mono-code text-[11px] text-gray-500 uppercase tracking-widest">Collecting...</span>
+                </div>
+            </div>
+
+            <!-- Aggregated Stats Card -->
+            <div class="bg-pure-white rounded-xl border border-border-subtle p-6 shadow-sm space-y-6">
+                <div>
+                    <span class="font-mono-code text-mono-code text-gray-400 block mb-2">24H MINIMUM</span>
+                    <span id="stat-min" class="font-card-title text-card-title text-near-black">-- {{ sensor_config.unit }}</span>
+                </div>
+                <div class="h-px bg-border-subtle"></div>
+                <div>
+                    <span class="font-mono-code text-mono-code text-gray-400 block mb-2">24H MAXIMUM</span>
+                    <span id="stat-max" class="font-card-title text-card-title text-near-black">-- {{ sensor_config.unit }}</span>
+                </div>
+                <div class="h-px bg-border-subtle"></div>
+                <div>
+                    <span class="font-mono-code text-mono-code text-brand-green-deep block mb-2">24H AVERAGE</span>
+                    <span id="stat-avg" class="font-card-title text-card-title text-brand-green-deep font-bold">-- {{ sensor_config.unit }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Chart Card -->
+        <div class="lg:col-span-3 bg-pure-white rounded-2xl border border-border-subtle p-8 shadow-sm flex flex-col min-h-[500px]">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-near-black">
+                        <span class="material-symbols-outlined">timeline</span>
+                    </div>
+                    <h3 class="font-card-title text-card-title text-near-black">Historical Trend (24H)</h3>
+                </div>
+                <div class="text-right">
+                    <p class="font-mono-code text-mono-code text-gray-400">INTERVAL: 1 HOUR</p>
+                </div>
+            </div>
+            
+            <div class="flex-1 relative">
+                <canvas id="climatic-chart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    // Configuration Data
+    const SENSOR_MAP = {
+        'temperature': {'title': 'Temperature', 'subtitle': 'Ambient Air Temperature Readings', 'unit': '°C', 'color': '#163300'},
+        'humidity':    {'title': 'Air Humidity', 'subtitle': 'Relative Humidity Readings', 'unit': '%', 'color': '#054d28'},
+        'moisture':    {'title': 'Soil Moisture', 'subtitle': 'Capacitive Sensor Readings', 'unit': '%', 'color': '#9fe870'},
+        'co2':         {'title': 'CO₂ Level', 'subtitle': 'MQ-135 Gas Sensor Readings', 'unit': 'ppm', 'color': '#0e0f0c'},
+    };
+
+    let currentType = '{{ sensor_type }}';
+    let currentConfig = SENSOR_MAP[currentType];
+
+    // DOM Elements
+    const titleEl = document.querySelector('h2.font-section-heading');
+    const subtitleEl = document.querySelector('p.font-body-large');
+    const statCurrent = document.getElementById('stat-current');
+    const statMin = document.getElementById('stat-min');
+    const statMax = document.getElementById('stat-max');
+    const statAvg = document.getElementById('stat-avg');
+    const statusBadge = document.getElementById('status-badge');
+    const navLinks = document.querySelectorAll('.flex.gap-2.bg-pure-white a');
+    
+    // Update Units in UI (the static text parts)
+    const unitEls = document.querySelectorAll('.text-sub-heading, .font-card-title');
+
+    // Chart Initialization
+    const ctx = document.getElementById('climatic-chart').getContext('2d');
+    let chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: currentConfig.title,
+                data: [],
+                borderColor: currentConfig.color,
+                backgroundColor: currentConfig.color + '10',
+                borderWidth: 4,
+                pointRadius: 0,
+                pointHoverRadius: 6,
+                pointHoverBackgroundColor: currentConfig.color,
+                pointHoverBorderColor: '#fff',
+                pointHoverBorderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#fff',
+                    titleColor: '#0e0f0c',
+                    bodyColor: '#0e0f0c',
+                    borderColor: 'rgba(14,15,12,0.08)',
+                    borderWidth: 1,
+                    cornerRadius: 12,
+                    padding: 12,
+                    titleFont: { weight: 'bold', family: 'Inter' },
+                    bodyFont: { family: 'Inter' },
+                    callbacks: {
+                        label: function(context) {
+                            return ` ${context.parsed.y} ${currentConfig.unit}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#868685', font: { size: 11, weight: '600' } } },
+                y: { grid: { color: '#f0f2ef', drawBorder: false }, ticks: { color: '#868685', font: { size: 11, weight: '600' } } }
+            }
+        }
+    });
+
+    async function updateData(type) {
+        const config = SENSOR_MAP[type];
+        try {
+            const res = await fetch(`/api/climatic/${type}?hours=24`);
+            const data = await res.json();
+            
+            // Update Stats
+            if (data.stats) {
+                statCurrent.textContent = data.stats.current;
+                statMin.textContent = `${data.stats.min} ${config.unit}`;
+                statMax.textContent = `${data.stats.max} ${config.unit}`;
+                statAvg.textContent = `${data.stats.avg} ${config.unit}`;
+                
+                statusBadge.innerHTML = `
+                    <span class="w-2 h-2 rounded-full bg-brand-green-deep animate-pulse"></span>
+                    <span class="font-mono-code text-[11px] text-brand-green-deep uppercase tracking-widest">Live: Optimal</span>
+                `;
+            }
+            
+            // Update Chart
+            if (data.timeseries && data.timeseries.length > 0) {
+                chart.data.labels = data.timeseries.map(d => d.time);
+                chart.data.datasets[0].data = data.timeseries.map(d => d.value);
+                chart.data.datasets[0].label = config.title;
+                chart.data.datasets[0].borderColor = config.color;
+                chart.data.datasets[0].backgroundColor = config.color + '10';
+                chart.data.datasets[0].pointHoverBackgroundColor = config.color;
+                chart.update();
+            }
+        } catch (e) {
+            console.error('Failed to fetch climatic data:', e);
+        }
+    }
+
+    function switchSensor(type) {
+        if (type === currentType) return;
+        
+        currentType = type;
+        currentConfig = SENSOR_MAP[type];
+
+        // Update UI
+        titleEl.textContent = `${currentConfig.title} Analysis`;
+        subtitleEl.textContent = currentConfig.subtitle;
+        document.title = `Demeter — ${currentConfig.title} Analysis`;
+
+        // Update Navigation Active State
+        navLinks.forEach(link => {
+            const linkType = link.getAttribute('href').split('/').pop();
+            if (linkType === type) {
+                link.className = "px-4 py-2 rounded-full font-label-uppercase text-label-uppercase bg-near-black text-pure-white shadow-md";
+            } else {
+                link.className = "px-4 py-2 rounded-full font-label-uppercase text-label-uppercase text-gray-500 hover:text-near-black transition-colors";
+            }
+        });
+
+        // Update URL
+        window.history.pushState({ type }, "", `/climatic/${type}`);
+
+        // Trigger Data Update
+        updateData(type);
+    }
+
+    // Handle Nav Clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const type = link.getAttribute('href').split('/').pop();
+            switchSensor(type);
+        });
+    });
+
+    // Handle Browser Back/Forward
+    window.addEventListener('popstate', (e) => {
+        if (e.state && e.state.type) {
+            switchSensor(e.state.type);
+        } else {
+            // Default to temperature if no state
+            switchSensor('temperature');
+        }
+    });
+
+    // Initial load
+    updateData(currentType);
+    setInterval(() => updateData(currentType), 30000);
+});
+</script>
+{% endblock %}

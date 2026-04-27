@@ -32,11 +32,13 @@ Demeter is "The Hand" of the Gaia Prime ecosystem, providing intelligent agronom
 
 ```
 /demeter/
-├── demeter_main.py            # Bot & Flask Orchestrator
-├── demeter_memory_manager.py  # Ranking 2.0 Memory Controller
+├── demeter_main.py            # Flask Orchestrator & Entry Point
+├── core/                      # Core Modules (state, vision, ai, telegram, memory)
+├── templates/                 # Wise Design HTML Dashboard
+├── static/                    # CSS & JS Assets
 ├── persona_demeter.md         # Unified Markdown Persona
-├── garden_history.csv         # Sensor & Action Logs
-├── data_logs/                 # Archive for long-term telemetry
+├── PROJECT_HISTORY.md         # AI Context Loader
+├── data_logs/                 # Sensor & Action Logs (CSV)
 └── vision_capture/            # Historical plant snapshots
 ```
 
@@ -58,8 +60,12 @@ Create an `.env` file in the `demeter/` directory:
 BOT_TOKEN=your_telegram_bot_token
 TELEGRAM_CHAT_ID=your_id
 LLM_API_KEY=your_key
+LLM_BASE_MODEL=gemini/gemini-2.0-flash
+LLM_BASE_URL=
 RTSP_URL=rtsp://user:pass@ip:port/stream
-MOISTURE_SAFETY_LIMIT=20
+MOISTURE_SAFETY_LIMIT=40
+DASHBOARD_USERNAME=admin
+DASHBOARD_PASSWORD=admin123
 ```
 
 ### 3. ESP32 Integration
@@ -95,5 +101,3 @@ python -m demeter.demeter_main
 Demeter is fully decentralized. She can operate as a "Garden Guardian" in **STANDALONE (Survival)** mode, managing irrigation and visual logs without external connectivity. See [README_STANDALONE.md](README_STANDALONE.md).
 
 ---
-
-_Status: 🌿 System Healthy_

@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w-full">
+<!-- Page Header -->
+<div class="mb-lg flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-border-subtle pb-6">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="px-3 py-1 bg-brand-green-light rounded-full font-mono-code text-mono-code text-brand-green-deep uppercase tracking-wider">Active Specimen</span>
+<span class="font-mono-code text-mono-code text-gray-500">ID: B-7492-X</span>
+</div>
+<h2 id="active-specimen-name" class="font-section-heading text-section-heading text-near-black mb-2">Monstera Deliciosa Variegata</h2>
+<p id="active-specimen-summary" class="font-body-large text-body-large text-gray-600 max-w-2xl">Loading specimen analysis...</p>
+</div>
+<button id="btn-manual-analysis" class="shrink-0 bg-near-black text-pure-white rounded-full px-6 py-3 font-body-base text-body-base font-medium hover:bg-gray-700 transition-colors shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="science">science</span>
+                Manual Analysis
+            </button>
+            </div>
+<!-- Asymmetric Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Chronological Log (occupies 5 cols on lg) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-sub-heading text-sub-heading text-near-black">Growth History</h3>
+<button class="text-gray-500 hover:text-brand-green-deep transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+<!-- Log Entries List -->
+<div id="growth-list" class="space-y-4 relative before:absolute before:inset-y-0 before:left-4 before:w-px before:bg-border-subtle">
+<!-- Entry 1 -->
+<div class="relative pl-12">
+<div class="absolute left-[13px] top-4 w-2 h-2 rounded-full bg-brand-green-deep z-10 ring-4 ring-pure-white"></div>
+<div class="bg-pure-white rounded-lg border border-border-subtle p-md shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-border-medium transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="font-mono-code text-mono-code text-gray-500">Today, 09:00 AM</span>
+<span class="px-2 py-1 bg-surface-container-low rounded-full font-mono-code text-mono-code text-primary">Auto-Logged</span>
+</div>
+<div class="flex gap-4 mb-4">
+<div class="flex-1 bg-surface-container-lowest border border-border-subtle rounded-md p-3 text-center">
+<span class="block font-mono-code text-mono-code text-gray-500 mb-1">Height</span>
+<span class="font-card-title text-card-title text-near-black">12.5cm</span>
+</div>
+<div class="flex-1 bg-brand-green-light/30 border border-brand-green-light rounded-md p-3 text-center">
+<span class="block font-mono-code text-mono-code text-gray-500 mb-1">Health</span>
+<span class="font-card-title text-card-title text-brand-green-deep">98%</span>
+</div>
+</div>
+<div class="bg-gray-50 rounded-md p-4 border border-border-subtle">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-brand-green-deep text-sm" data-icon="psychiatry">psychiatry</span>
+<span class="font-label-uppercase text-label-uppercase text-near-black">AI Observation</span>
+</div>
+<p class="font-body-base text-body-base text-gray-700">Strong internodal development. Chlorophyll density in new leaves indicates optimal nutrient uptake. Maintain current EC levels.</p>
+</div>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="relative pl-12 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute left-[13px] top-4 w-2 h-2 rounded-full bg-gray-300 z-10 ring-4 ring-pure-white"></div>
+<div class="bg-pure-white rounded-lg border border-border-subtle p-md shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-border-medium transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="font-mono-code text-mono-code text-gray-500">Yesterday, 08:45 AM</span>
+<span class="px-2 py-1 bg-surface-container-low rounded-full font-mono-code text-mono-code text-primary">Auto-Logged</span>
+</div>
+<div class="flex gap-4 mb-4">
+<div class="flex-1 bg-surface-container-lowest border border-border-subtle rounded-md p-3 text-center">
+<span class="block font-mono-code text-mono-code text-gray-500 mb-1">Height</span>
+<span class="font-card-title text-card-title text-near-black">12.1cm</span>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-border-subtle rounded-md p-3 text-center">
+<span class="block font-mono-code text-mono-code text-gray-500 mb-1">Health</span>
+<span class="font-card-title text-card-title text-near-black">97%</span>
+</div>
+</div>
+<div class="bg-gray-50 rounded-md p-4 border border-border-subtle">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-brand-green-deep text-sm" data-icon="psychiatry">psychiatry</span>
+<span class="font-label-uppercase text-label-uppercase text-near-black">AI Observation</span>
+</div>
+<p class="font-body-base text-body-base text-gray-700">Minor tip burn detected on lower fan leaves. Likely slight potassium deficiency. Adjust fertigation mix slightly.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Consultation Panel (occupies 7 cols on lg) -->
+<div class="lg:col-span-7 flex flex-col min-h-[560px] lg:h-[800px]">
+<div class="bg-pure-white rounded-xl border border-border-subtle shadow-[0_2px_12px_rgba(0,0,0,0.04)] flex flex-col h-full overflow-hidden">
+<!-- Panel Header -->
+<div class="p-6 border-b border-border-subtle flex justify-between items-center bg-gray-50/50">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-brand-green-light flex items-center justify-center text-brand-green-deep">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<div>
+<h3 class="font-card-title text-card-title text-near-black">Demeter Assistant</h3>
+<p class="font-mono-code text-mono-code text-gray-500">RAG Context: Monstera Profile + Recent Logs</p>
+</div>
+</div>
+<button class="text-gray-400 hover:text-near-black transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Chat Canvas -->
+<div id="page-chat-messages" class="flex-1 p-6 overflow-y-auto bg-surface-bright flex flex-col gap-6">
+<!-- Dynamic chat messages will be loaded here -->
+</div>
+<!-- Input Area -->
+<div class="p-4 border-t border-border-subtle bg-pure-white">
+<form id="page-chat-form" class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-border-medium rounded-full py-4 pl-6 pr-16 font-body-base text-body-base text-near-black placeholder:text-gray-400 focus:outline-none focus:border-brand-green-deep focus:ring-1 focus:ring-brand-green-deep transition-all" placeholder="Ask Demeter about health trends, pathogens, or parameters..." type="text" id="page-chat-input" autocomplete="off" required/>
+<button type="submit" class="absolute right-2 h-10 w-10 bg-brand-green rounded-full flex items-center justify-center text-near-black hover:bg-brand-green-deep transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</form>
+<div class="flex gap-2 mt-3 px-2">
+<button class="px-3 py-1 border border-border-subtle rounded-full font-mono-code text-mono-code text-gray-500 hover:bg-gray-50 transition-colors">Generate Report</button>
+<button class="px-3 py-1 border border-border-subtle rounded-full font-mono-code text-mono-code text-gray-500 hover:bg-gray-50 transition-colors">Check Nutrients</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const chatForm = document.getElementById('page-chat-form');
+    const chatInput = document.getElementById('page-chat-input');
+    const chatMessages = document.getElementById('page-chat-messages');
+    const btnManualAnalysis = document.getElementById('btn-manual-analysis');
+
+    // ===== CHAT HISTORY PERSISTENCE =====
+    async function restoreChatHistory() {
+        if (!chatMessages) return;
+        
+        try {
+            const res = await fetch('/api/chat/history');
+            const entries = await res.json();
+            
+            if (entries && entries.length > 0) {
+                chatMessages.innerHTML = ''; // Clear loader or old messages
+                entries.forEach(e => addChatMessage(e.message, e.role === 'user', false));
+            } else {
+                // Show welcome message only if no history in DB
+                addChatMessage('Hello! I\'m Demeter, your plant growth consultant. Ask me about health trends, nutrient analysis, or growth parameters. I have context from your recent sensor data and growth logs.', false, false);
+            }
+        } catch(e) {
+            console.error('Failed to restore chat history:', e);
+            addChatMessage('Hello! I\'m Demeter, your plant growth consultant. Ask me about health trends, nutrient analysis, or growth parameters. I have context from your recent sensor data and growth logs.', false, false);
+        }
+    }
+
+    // ===== MANUAL ANALYSIS BUTTON =====
+    if (btnManualAnalysis) {
+        btnManualAnalysis.addEventListener('click', async () => {
+            if (!confirm('Trigger a manual visual scan + AI analysis?')) return;
+            btnManualAnalysis.disabled = true;
+            btnManualAnalysis.classList.add('opacity-60', 'cursor-wait');
+            try {
+                const res = await fetch('/api/controls/scan', { method: 'POST' });
+                const data = await res.json();
+                alert(data.message || (data.success ? 'Scan command queued.' : 'Command failed.'));
+            } catch (e) {
+                alert('Failed to send scan command. Check server connection.');
+            } finally {
+                btnManualAnalysis.disabled = false;
+                btnManualAnalysis.classList.remove('opacity-60', 'cursor-wait');
+            }
+        });
+    }
+
+    // ===== GROWTH HISTORY =====
+    const growthList = document.getElementById('growth-list');
+    async function fetchHistory() {
+        if(!growthList) return;
+        try {
+            const res = await fetch('/api/growth-logs');
+            const data = await res.json();
+            
+            if (data.length === 0) {
+                growthList.innerHTML = '<p class="text-center py-12 text-[14px] font-medium text-[#888888]">No logs yet.</p>';
+                return;
+            }
+
+            growthList.innerHTML = '';
+            data.forEach(log => {
+                const card = document.createElement('div');
+                card.className = 'relative pl-12 mb-4';
+                
+                let badgeClass = 'bg-brand-green-light/30 border-brand-green-light text-brand-green-deep';
+                if (log.health !== 'Excellent' && log.health !== 'Good') {
+                    badgeClass = 'bg-warn-amber/10 border-warn-amber/20 text-warn-amber';
+                }
+
+                card.innerHTML = `
+                    <div class="absolute left-[13px] top-4 w-2 h-2 rounded-full bg-brand-green-deep z-10 ring-4 ring-pure-white"></div>
+                    <div class="bg-pure-white rounded-lg border border-border-subtle p-md shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-border-medium transition-colors">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="font-mono-code text-[14px] text-near-black font-semibold mr-2">${log.plant_name}</span>
+                                <span class="font-mono-code text-mono-code text-gray-500">${log.timestamp}</span>
+                            </div>
+                            <span class="px-2 py-1 bg-surface-container-low rounded-full font-mono-code text-mono-code text-primary">Server-Logged</span>
+                        </div>
+                        <div class="flex gap-4 mb-4">
+                            <div class="flex-1 bg-surface-container-lowest border border-border-subtle rounded-md p-3 text-center">
+                                <span class="block font-mono-code text-mono-code text-gray-500 mb-1">Height</span>
+                                <span class="font-card-title text-card-title text-near-black">${log.height} cm</span>
+                            </div>
+                            <div class="flex-1 border rounded-md p-3 text-center ${badgeClass}">
+                                <span class="block font-mono-code text-mono-code mb-1">Health</span>
+                                <span class="font-card-title text-card-title">${log.health}</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 rounded-md p-4 border border-border-subtle">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="material-symbols-outlined text-brand-green-deep text-sm" data-icon="psychiatry">psychiatry</span>
+                                <span class="font-label-uppercase text-label-uppercase text-near-black">Report Notes</span>
+                            </div>
+                            <p class="font-body-base text-body-base text-gray-700">${log.notes || 'No description provided.'}</p>
+                        </div>
+                    </div>
+                `;
+                growthList.appendChild(card);
+            });
+            if(typeof lucide !== 'undefined') lucide.createIcons();
+        } catch (e) { console.error(e); }
+    }
+    fetchHistory();
+
+    // ===== CHAT FORM =====
+    if(chatForm) {
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const msg = chatInput.value.trim();
+            if (!msg) return;
+            sendToAIConsultant(msg);
+        });
+    }
+
+    async function sendToAIConsultant(msg) {
+        addChatMessage(msg, true);
+        chatInput.value = '';
+        
+        const loadingId = 'ai-load-' + Date.now();
+        addChatLoading(loadingId);
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+            document.getElementById(loadingId).remove();
+            
+            let replyText = data.reply;
+            if(!replyText && data.error) replyText = 'Error: ' + data.error; 
+            
+            addChatMessage(replyText, false);
+        } catch (e) {
+            if(document.getElementById(loadingId)) document.getElementById(loadingId).remove();
+            addChatMessage('Agronomist is offline. Check connection.', false);
+        }
+    }
+
+    function addChatMessage(text, isUser) {
+        const div = document.createElement('div');
+        div.setAttribute('data-chat-role', isUser ? 'user' : 'ai');
+        div.setAttribute('data-chat-text', text);
+        if (isUser) {
+            div.className = 'flex gap-4 max-w-[85%] self-end flex-row-reverse';
+            div.innerHTML = `
+                <div class="h-8 w-8 rounded-full bg-surface-container overflow-hidden shrink-0 mt-1 border border-border-subtle border-2">
+                    <span class="material-symbols-outlined text-sm flex items-center justify-center h-full w-full bg-near-black text-pure-white" data-icon="person">person</span>
+                </div>
+                <div class="bg-near-black text-pure-white rounded-2xl rounded-tr-sm p-4 shadow-[0_2px_4px_rgba(0,0,0,0.04)]">
+                    <p class="font-body-base text-body-base">${text}</p>
+                </div>
+            `;
+        } else {
+            div.className = 'flex gap-4 max-w-[85%]';
+            div.innerHTML = `
+                <div class="h-8 w-8 rounded-full bg-brand-green-light flex items-center justify-center text-brand-green-deep shrink-0 mt-1">
+                    <span class="material-symbols-outlined text-sm" data-icon="smart_toy">smart_toy</span>
+                </div>
+                <div class="bg-pure-white border border-border-subtle rounded-2xl rounded-tl-sm p-4 shadow-[0_2px_4px_rgba(0,0,0,0.02)] w-full">
+                    <p class="font-body-base text-body-base text-near-black leading-relaxed">${text ? text.replace(/\n/g, '<br>') : '...'}</p>
+                </div>
+            `;
+        }
+        if(chatMessages) {
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+
+    function addChatLoading(id) {
+        const div = document.createElement('div');
+        div.id = id;
+        div.className = 'flex gap-4 max-w-[85%]';
+        div.innerHTML = `
+            <div class="h-8 w-8 rounded-full bg-brand-green-light flex items-center justify-center text-brand-green-deep shrink-0 mt-1 animate-pulse">
+                <span class="material-symbols-outlined text-sm" data-icon="smart_toy">smart_toy</span>
+            </div>
+            <div class="bg-pure-white border border-border-subtle rounded-2xl rounded-tl-sm p-4 shadow-[0_2px_4px_rgba(0,0,0,0.02)] w-full flex items-center">
+                <p class="font-mono-code text-[10px] text-gray-400 tracking-widest animate-pulse">ANALYZING...</p>
+            </div>
+        `;
+        if(chatMessages) {
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+
+    // Initialize: restore chat history
+    restoreChatHistory();
+
+    // ===== LATEST INSIGHT FOR SUMMARY =====
+    async function fetchSpecimenSummary() {
+        const nameEl = document.getElementById('active-specimen-name');
+        const summaryEl = document.getElementById('active-specimen-summary');
+        if (!summaryEl) return;
+        
+        try {
+            // 1. Fetch Setting for Name
+            const setRes = await fetch('/api/settings');
+            const setData = await setRes.json();
+            if (nameEl && setData.plant_name) {
+                nameEl.textContent = setData.plant_name;
+            }
+
+            // 2. Fetch Latest Insight for Summary
+            const res = await fetch('/api/insights/latest');
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            
+            if (data && data.notes) {
+                summaryEl.textContent = data.notes;
+            } else {
+                summaryEl.textContent = "No recent AI analysis available. Trigger a manual scan to generate one.";
+            }
+        } catch (e) {
+            summaryEl.textContent = "Telemetry analysis temporarily unavailable.";
+        }
+    }
+    fetchSpecimenSummary();
+});
+</script>
+
+{% endblock %}

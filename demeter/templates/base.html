@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>{% block title %}Demeter AI - Dashboard{% endblock %}</title>
+    {% block head_extra %}{% endblock %}
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="/static/css/style.css" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "outline-variant": "#bacbbe",
+                            "error-red": "#d45656",
+                            "surface-tint": "#006c47",
+                            "secondary": "#5f5e5e",
+                            "brand-green": "#18E299",
+                            "on-error": "#ffffff",
+                            "tertiary": "#865300",
+                            "gray-200": "#e5e5e5",
+                            "surface-container-high": "#e1ebe2",
+                            "secondary-container": "#e5e2e1",
+                            "gray-500": "#666666",
+                            "outline": "#6b7b70",
+                            "gray-400": "#888888",
+                            "border-medium": "rgba(0,0,0,0.08)",
+                            "surface-container-lowest": "#ffffff",
+                            "brand-green-deep": "#0fa76e",
+                            "on-tertiary-fixed-variant": "#663e00",
+                            "on-secondary": "#ffffff",
+                            "inverse-on-surface": "#eaf3ea",
+                            "surface-container-highest": "#dce5dc",
+                            "surface-variant": "#dce5dc",
+                            "tertiary-fixed-dim": "#ffb962",
+                            "primary-fixed-dim": "#17e299",
+                            "on-tertiary-container": "#764900",
+                            "on-background": "#151d18",
+                            "tertiary-fixed": "#ffddb9",
+                            "on-surface": "#151d18",
+                            "primary": "#006c47",
+                            "on-tertiary": "#ffffff",
+                            "surface-dim": "#d3dcd4",
+                            "on-primary-fixed-variant": "#005234",
+                            "brand-green-light": "#d4fae8",
+                            "tertiary-container": "#ffb962",
+                            "surface-bright": "#f3fcf3",
+                            "inverse-primary": "#17e299",
+                            "inverse-surface": "#2a322d",
+                            "on-primary-container": "#005f3d",
+                            "error": "#ba1a1a",
+                            "secondary-fixed-dim": "#c9c6c5",
+                            "on-primary-fixed": "#002112",
+                            "warn-amber": "#c37d0d",
+                            "surface-container": "#e7f0e8",
+                            "primary-fixed": "#4dffb3",
+                            "on-secondary-container": "#656464",
+                            "gray-700": "#333333",
+                            "on-tertiary-fixed": "#2b1700",
+                            "on-error-container": "#93000a",
+                            "gray-50": "#fafafa",
+                            "pure-white": "#ffffff",
+                            "border-subtle": "rgba(0,0,0,0.05)",
+                            "on-secondary-fixed": "#1c1b1b",
+                            "primary-container": "#18e299",
+                            "error-container": "#ffdad6",
+                            "on-primary": "#ffffff",
+                            "info-blue": "#3772cf",
+                            "near-black": "#0d0d0d",
+                            "surface": "#f3fcf3",
+                            "background": "#f3fcf3",
+                            "surface-container-low": "#edf6ed",
+                            "on-surface-variant": "#3b4a41",
+                            "secondary-fixed": "#e5e2e1",
+                            "on-secondary-fixed-variant": "#474646"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "1rem",
+                            "lg": "2rem",
+                            "xl": "3rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "md": "24px",
+                            "base": "8px",
+                            "xs": "4px",
+                            "lg": "48px",
+                            "xl": "96px",
+                            "sm": "12px",
+                            "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                            "label-uppercase": [
+                                    "Inter"
+                            ],
+                            "body-large": [
+                                    "Inter"
+                            ],
+                            "section-heading": [
+                                    "Inter"
+                            ],
+                            "card-title": [
+                                    "Inter"
+                            ],
+                            "display-hero": [
+                                    "Inter"
+                            ],
+                            "sub-heading": [
+                                    "Inter"
+                            ],
+                            "mono-code": [
+                                    "Geist Mono"
+                            ],
+                            "body-base": [
+                                    "Inter"
+                            ]
+                    },
+                    "fontSize": {
+                            "label-uppercase": [
+                                    "13px",
+                                    {
+                                            "lineHeight": "1.50",
+                                            "letterSpacing": "0.65px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "body-large": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "1.50",
+                                            "letterSpacing": "normal",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "section-heading": [
+                                    "40px",
+                                    {
+                                            "lineHeight": "1.10",
+                                            "letterSpacing": "-0.8px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "card-title": [
+                                    "20px",
+                                    {
+                                            "lineHeight": "1.30",
+                                            "letterSpacing": "-0.2px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "display-hero": [
+                                    "64px",
+                                    {
+                                            "lineHeight": "1.15",
+                                            "letterSpacing": "-1.28px",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "sub-heading": [
+                                    "24px",
+                                    {
+                                            "lineHeight": "1.30",
+                                            "letterSpacing": "-0.24px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "mono-code": [
+                                    "12px",
+                                    {
+                                            "lineHeight": "1.50",
+                                            "letterSpacing": "0.6px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "body-base": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "1.50",
+                                            "letterSpacing": "normal",
+                                            "fontWeight": "400"
+                                    }
+                            ]
+                    }
+            },
+                },
+            }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen font-body-base text-body-base flex">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 border-r border-border-subtle fixed left-0 top-0 bg-pure-white flex flex-col h-full p-6 justify-between z-50">
+<div>
+<!-- Header/Brand -->
+<div class="mb-lg">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-brand-green-light flex items-center justify-center">
+<span class="material-symbols-outlined text-brand-green-deep text-lg" data-icon="eco">eco</span>
+</div>
+<div>
+<h1 class="font-sub-heading text-card-title text-near-black">Demeter AI</h1>
+<p class="font-mono-code text-mono-code text-gray-500 uppercase tracking-widest">Agronomist Dashboard</p>
+</div>
+</div>
+</div>
+<!-- Primary Navigation -->
+
+<nav class="space-y-sm">
+<!-- Active Item: Overview -->
+<a class="{% if active_page == 'dashboard' %}bg-brand-green/10 text-brand-green-deep{% else %}text-gray-500 hover:text-near-black hover:bg-gray-50{% endif %} rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200 active:scale-[0.98]" href="/">
+<span class="material-symbols-outlined" data-icon="dashboard" {% if active_page == 'dashboard' %}data-weight="fill" style="font-variation-settings: 'FILL' 1;"{% endif %}>dashboard</span>
+<span class="font-label-uppercase text-label-uppercase">Overview</span>
+</a>
+<!-- Active Item: Growth Log -->
+<a class="{% if active_page == 'growth_log' %}bg-brand-green/10 text-brand-green-deep{% else %}text-gray-500 hover:text-near-black hover:bg-gray-50{% endif %} rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200 active:scale-[0.98]" href="/growth-log">
+<span class="material-symbols-outlined" data-icon="potted_plant" {% if active_page == 'growth_log' %}data-weight="fill" style="font-variation-settings: 'FILL' 1;"{% endif %}>potted_plant</span>
+<span class="font-label-uppercase text-label-uppercase">Growth Log</span>
+</a>
+<!-- Active Item: Climatic Analysis -->
+<a class="{% if active_page and active_page.startswith('climatic') %}bg-brand-green/10 text-brand-green-deep{% else %}text-gray-500 hover:text-near-black hover:bg-gray-50{% endif %} rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200 active:scale-[0.98]" href="/climatic/temperature">
+<span class="material-symbols-outlined" data-icon="monitoring" {% if active_page and active_page.startswith('climatic') %}data-weight="fill" style="font-variation-settings: 'FILL' 1;"{% endif %}>monitoring</span>
+<span class="font-label-uppercase text-label-uppercase">Climatic Analysis</span>
+</a>
+<!-- Active Item: Control Center -->
+<a class="{% if active_page == 'controls' %}bg-brand-green/10 text-brand-green-deep{% else %}text-gray-500 hover:text-near-black hover:bg-gray-50{% endif %} rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200 active:scale-[0.98]" href="/controls">
+<span class="material-symbols-outlined" data-icon="settings_remote" {% if active_page == 'controls' %}data-weight="fill" style="font-variation-settings: 'FILL' 1;"{% endif %}>settings_remote</span>
+<span class="font-label-uppercase text-label-uppercase">Control Center</span>
+</a>
+</nav>
+
+</div>
+<div>
+<!-- CTA Area -->
+<div class="mb-md">
+<button id="btn-sidebar-force-scan" class="w-full bg-near-black text-pure-white rounded-full py-2 px-4 font-label-uppercase text-label-uppercase flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="play_arrow">play_arrow</span>
+                    Run Diagnostic
+                </button>
+</div>
+<!-- Footer Navigation -->
+
+<nav class="space-y-xs pt-4 border-t border-border-subtle">
+<a class="text-gray-500 hover:text-near-black hover:bg-gray-50 rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200" href="/reports">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+<span class="font-mono-code text-mono-code">Reports</span>
+</a>
+<a class="{% if active_page == 'settings' %}bg-brand-green/10 text-brand-green-deep{% else %}text-gray-500 hover:text-near-black hover:bg-gray-50{% endif %} rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200" href="/settings">
+<span class="material-symbols-outlined text-sm" data-icon="settings" {% if active_page == 'settings' %}data-weight="fill" style="font-variation-settings: 'FILL' 1;"{% endif %}>settings</span>
+<span class="font-mono-code text-mono-code">Settings</span>
+</a>
+<a class="text-gray-500 hover:text-error-red hover:bg-error-container rounded-full px-4 py-2 flex items-center gap-3 transition-all duration-200" href="/logout">
+<span class="material-symbols-outlined text-sm" data-icon="logout">logout</span>
+<span class="font-mono-code text-mono-code">Logout</span>
+</a>
+</nav>
+
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar Component -->
+<header class="sticky top-0 w-full z-40 bg-pure-white/80 backdrop-blur-xl border-b border-border-subtle flex justify-between items-center h-16 px-8">
+<div class="flex items-center gap-6">
+<!-- Search (Left aligned in this layout context for balance, though JSON says 'on_right', balancing with links) -->
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm" data-icon="search">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-transparent border border-border-medium rounded-full font-body-base text-[14px] text-near-black focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-colors w-64 placeholder:text-gray-400" placeholder="Search parameters..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-uppercase text-label-uppercase text-gray-500 hover:text-brand-green-deep transition-colors cursor-pointer" href="/">Status</a>
+<a class="font-label-uppercase text-label-uppercase text-gray-500 hover:text-brand-green-deep transition-colors cursor-pointer" href="/reports">Support</a>
+<a class="font-label-uppercase text-label-uppercase text-gray-500 hover:text-brand-green-deep transition-colors cursor-pointer" href="/settings">API</a>
+</nav>
+<!-- Notification Bell -->
+<div class="relative">
+<button id="btn-notifications" class="relative w-9 h-9 rounded-full flex items-center justify-center hover:bg-gray-50 transition-colors border border-transparent hover:border-border-subtle" aria-label="Notifications">
+<span class="material-symbols-outlined text-gray-500 text-[20px]" data-icon="notifications">notifications</span>
+<span id="notif-count" class="hidden absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] rounded-full bg-brand-green text-near-black text-[10px] font-bold flex items-center justify-center px-1 shadow-sm border border-pure-white">0</span>
+</button>
+<!-- Notification Dropdown -->
+<div id="notif-dropdown" class="hidden absolute right-0 top-full mt-2 w-80 bg-pure-white rounded-[16px] border border-border-subtle shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-50 overflow-hidden">
+<div class="flex items-center justify-between px-4 py-3 border-b border-border-subtle">
+<h4 class="font-label-uppercase text-label-uppercase text-near-black tracking-widest">Notifications</h4>
+<button id="btn-mark-read" class="font-mono-code text-mono-code text-brand-green-deep hover:text-primary transition-colors">Mark All Read</button>
+</div>
+<div id="notif-list" class="max-h-72 overflow-y-auto custom-scroll">
+<p class="text-center py-6 text-[12px] font-bold text-gray-400 uppercase tracking-wider">No notifications</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 border-l border-border-subtle pl-6">
+<div id="esp32-connection-badge" class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 bg-gray-50 border border-border-subtle">
+<span id="esp32-connection-dot" class="w-2 h-2 rounded-full bg-gray-400"></span>
+<span id="esp32-connection-text" class="font-label-uppercase text-label-uppercase text-gray-500">ESP32: Checking...</span>
+</div>
+<img alt="Agronomist Avatar" class="w-8 h-8 rounded-full border border-border-medium object-cover" data-alt="professional headshot of female agronomist in greenhouse setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5EW5rTqYR4UEij47sy6SXa4TqMm9CyushABATxFk5hSoMItDQtlIhvhWalG9nurEyVlbUKfhq0zMs02X_Pinlfz_oFggAgsQHPrRgBuIJo-bgQaQ8mWIWbFQb5MW1OyKrohA7E1oyHhWcZrZTpN9616r1xyBsXSejjHpw4jvwxy2_IGokdMjNjmykAG8esdhbYM6y-flTM-Hupehfyjhxy4pnSCdZQLZMY1yYf76A7fP522c8DCHJO-d2OhnltXt8Qum4qCPDBVI"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 p-lg overflow-y-auto">
+{% block content %}{% endblock %}
+
+</div>
+</main>
+<script src="/static/js/app.js"></script>
+</body></html>
