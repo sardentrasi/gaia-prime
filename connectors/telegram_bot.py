@@ -451,13 +451,21 @@ class TelegramBot:
     async def chat_rag(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not await self._restricted(update, context):
             return
-        # Accept both /chat [text] and plain text messages
-        if context.args:
+        # context.args is a list (possibly empty) when called via CommandHandler,
+        # and None when called via MessageHandler (plain text).
+        if context.args is not None:
+            # Called via /chat command
+            if not context.args:
+                await update.message.reply_text(
+                    "Usage: `/chat [question]` atau langsung kirim pesan teks ke Gaia.",
+                    parse_mode="Markdown"
+                )
+                return
             user_query = " ".join(context.args)
         elif update.message and update.message.text:
+            # Called via plain text MessageHandler
             user_query = update.message.text.strip()
         else:
-            await update.message.reply_text("Usage: `/chat [question]`", parse_mode="Markdown")
             return
         user_name = update.effective_user.first_name if update.effective_user else "User"
         user_id = update.effective_user.id
