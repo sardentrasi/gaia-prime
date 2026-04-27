@@ -9,7 +9,7 @@ import signal
 import pytz
 from datetime import datetime, timezone
 from telegram import Update
-from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Defaults
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, Defaults, filters
 from telegram.error import NetworkError, TimedOut
 from telegram.request import HTTPXRequest
 
@@ -388,7 +388,7 @@ class TelegramBot:
                 f"✅ <b>NEW SESSION CREATED</b>\n\n"
                 f"<b>Session ID</b>: <code>{session_id}</code>\n"
                 f"<b>User</b>: {user_name}\n\n"
-                "<i>This session is now active. All /chat messages will be isolated to this session.</i>"
+                "<i>This session is now active. All messages will be isolated to this session.</i>"
             )
             await update.message.reply_text(msg, parse_mode='HTML')
         except Exception as e:
@@ -440,7 +440,7 @@ class TelegramBot:
                 f"✅ <b>SWITCHED TO SESSION</b>\n\n"
                 f"<b>Session ID</b>: <code>{target_session}</code>\n"
                 f"<b>Created</b>: {created}\n\n"
-                "<i>All /chat messages will now use this session's context.</i>"
+                "<i>All messages will now use this session's context.</i>"
             )
             await update.message.reply_text(msg, parse_mode='HTML')
         except Exception as e:
@@ -451,10 +451,14 @@ class TelegramBot:
     async def chat_rag(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not await self._restricted(update, context):
             return
-        if not context.args:
+        # Accept both /chat [text] and plain text messages
+        if context.args:
+            user_query = " ".join(context.args)
+        elif update.message and update.message.text:
+            user_query = update.message.text.strip()
+        else:
             await update.message.reply_text("Usage: `/chat [question]`", parse_mode="Markdown")
             return
-        user_query = " ".join(context.args)
         user_name = update.effective_user.first_name if update.effective_user else "User"
         user_id = update.effective_user.id
         await context.bot.send_chat_action(chat_id=update.effective_chat.id, action="typing")
@@ -598,6 +602,7 @@ def build_telegram_app(agent_loop, module_manager):
     # Chat & Reminders
     app.add_handler(CommandHandler("chat", bot.chat_rag))
     app.add_handler(CommandHandler("remind", bot.remind_cmd))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, bot.chat_rag))
     
     # Error handler
     app.add_error_handler(bot.error_handler)
