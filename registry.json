@@ -13,6 +13,6 @@
   },
   "eleuthia": {
     "path": "eleuthia",
-    "active": true
+    "active": false
   }
 }
